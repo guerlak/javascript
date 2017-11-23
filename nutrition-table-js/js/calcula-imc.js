@@ -42,8 +42,6 @@ for (var i = 0; i < todosPacientes.length; i++) {
 
 		if(peso < 10 || peso > 300){
 				return false;
-		}else{
-			return true;
 		}
 	}
 
@@ -54,6 +52,7 @@ for (var i = 0; i < todosPacientes.length; i++) {
 		var imc = 0;
 		imc = peso / (altura * altura)
 		return imc.toFixed(2);
+		
 	}
 
 	

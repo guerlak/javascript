@@ -5,9 +5,6 @@ titulo.textContent = "Nutrition Web";
 
 	botao.addEventListener("click", function(){
 		event.preventDefault();
-		console.log("vc clicou");
-
-		
 
 		var form = document.querySelector("#formulario");
 		var paciente = getFormPacientes(form);
@@ -62,7 +59,6 @@ titulo.textContent = "Nutrition Web";
 		var alturaTd = createTd(paciente.altura, "info-altura");
 		var gorduraTd = createTd(paciente.gordura, "info-gordura");
 		var imcTd = createTd(paciente.imc, "info-imc");
-
 
 		pacienteTr.appendChild(nomeTd);
 		pacienteTr.appendChild(pesoTd);
