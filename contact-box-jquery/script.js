@@ -1,84 +1,111 @@
 $(document).ready(function(){
+	
+		var book = {
+			name: 'Personal Contacts',
+	
+			contacts: [],
+	
+			add: function(contact){
+				
+				for(key in this.contacts){
+					console.log("entered for add");
+					var c = this.contacts[key];
+						if(contact.phone === c.phone){
+							alert("phone not");
+							return;
+					}
+				}
 
-	var book = {
-		name: 'Personal Contacts',
-
-		contacts: [],
-
-		add: function(contact){
 				this.contacts.push(contact);
 				createContactBox(contact);
-		},
-
-		delete: function(nome){
-			for(indice in this.contatos){
-				var contato = this.contatos[indice];
-				if(contato.nome === nome){
-					this.contatos.splice(indice,1);
-					return true;
+				save();
+			},
+	
+			delete: function(phone){
+				for(key in this.contacts){
+					console.log("entrou no for delete")
+					var contact = this.contacts[key];
+					if(contact.phone === phone){
+						console.log("entrou no if delete")
+						this.contacts.splice(key,1);
+						this.save();
+						return true;
+					}
 				}
+				//throw new Error('Error removing user...');
+			},
+	
+			list: function(){
+				this.getSavedContacts();
+				for(key in this.contatos){
+					var contact = this.contacts[key];
+					createNewContact(contato)
+				}
+			},
+	
+			save: function(){
+				var contactsString = JSON.stringify(this.contacts);
+				console.log("stringyyy -> " + contatosString);
+				localStorage.contacts = contactsString;
+				
+			},
+	
+			getSavedContacts: function(){
+				contacts = JSON.parse(localStorage.contacts);
 			}
-			throw new Error('Error removing user');
-		},
-
-		list: function(){
-			this.getSavedContacts();
-			for(indice in this.contatos){
-				var contato = this.contatos[indice];
-				createNewContact(contato);
+		};
+	
+		$("#register").submit(function(event){
+			event.preventDefault();
+			var contact = {
+				name: $('#txtName').val(),
+				email: $('#txtEmail').val(),
+				phone: $('#txtPhone').val(),
+				website: $('#txtWebSite').val(),
 			}
-		},
+			console.log("This contact: " + contact.name);
+			book.add(contact);
+		});
+	
+		var createContactBox = function(contact){
+			var colors = [
+				'green-box',
+				'orange-box',
+				'blue-box',
+				'purple-box',
+				'red-box'
+			]
+	
+			var color = colors[Math.floor(Math.random() * colors.length)];
+	
+			var $box = $('<div>',{class:'contact-box '+ color, id:contact.phone});
+			var $name = $('<h3>',{text:contact.name});
+			var $email = $('<p>',{text:contact.email});
+			var $phone = $('<p>',{text:contact.phone});
+			var $website = $('<p>',{text:contact.website});
+			var $btnDelete = $('<button>',{class:'btnDelete',text:'x','data-phone':contact.phone});
+			var $contacts = $('#contacts');
 
-		save: function(){
-			var contatosString = JSON.stringify(this.contatos);
-			console.log("stringyyy -> " + contatosString);
-			localStorage.contatos = contatosString;
-			
-		},
+			$btnDelete.click(function(event){
+				console.log("passing delete")
+				var $btn = $(event.target);
+				var phone = $btn.data('phone');
+				var $box = $('#'.concat(phone));
 
-		getSavedContacts: function(){
-			contatos = JSON.parse(localStorage.contatos);
+					book.delete(phone);
+					$box.remove();
+			});
+	
+			$box.append($name);
+			$box.append($email);
+			$box.append($phone);
+			$box.append($website);
+			$box.append($btnDelete);
+			$contacts.append($box);
 		}
-	};
-
-	$("#register").submit(function(event){
-		event.preventDefault();
-		var contact = {
-			name: $('#txtName').val(),
-			email: $('#txtEmail').val(),
-			phone: $('#txtPhone').val(),
-			website: $('#txtWebSite').val()
-		}
-		console.log("This contact " + contact);
-		book.add(contact);
+	
+		book.list();
+		book.save();
+		console.log("All : "+book.getSavedContacts());
+	
 	});
-
-	var createContactBox = function(contact){
-		var colors = [
-			'green-box',
-			'orange-box',
-			'blue-box',
-			'purple-box',
-			'red-box'
-		]
-
-		var color = colors[Math.floor(Math.random() * colors.length)];
-
-		var $box = $('<div>',{class:'contact-box '+ color});
-		var $name = $('<h3>',{text:contact.name});
-		var $email = $('<p>',{text:contact.email});
-		var $phone = $('<p>',{text:contact.phone});
-		var $website = $('<p>',{text:contact.website});
-		var $contacts = $('#contacts');
-
-		$box.append($name);
-		$box.append($email);
-		$box.append($phone);
-		$box.append($website);
-		$contacts.append($box);
-	}
-
-	book.list();
-	book.save();
-
-});
