@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	
 		var book = {
-			
+
 			name: 'Personal Contacts',
 	
 			contacts: [],
@@ -86,7 +86,6 @@ $(document).ready(function(){
 			]
 	
 			var color = colors[Math.floor(Math.random() * colors.length)];
-	
 			var $box = $('<div>',{class:'contact-box '+ color, id:contact.phone});
 			var $name = $('<h3>',{class:'name', text:contact.name});
 			var $email = $('<p>',{class:'email',text:contact.email});
@@ -104,6 +103,7 @@ $(document).ready(function(){
 				console.log("O phone no delete é: " + phone);
 					book.delete(phone);
 					$box.remove();
+
 			});
 
 			$btnEdit.click(function(event){
@@ -111,7 +111,6 @@ $(document).ready(function(){
 				var $btn = $(event.target);
 				var phone = $btn.data('phone');
 				var $box = $('#'.concat(phone));
-
 				var $name = $box.find('.name');
 				var $email = $box.find('.email');
 				var $phone = $box.find('.phone');
@@ -124,8 +123,6 @@ $(document).ready(function(){
 				var oldPhone = $('#oldPhone').val($phone.text());
 				var phone = 	$('#txtPhone').val($phone.text());
 				$('#btnSubmit').val('Update');
-
-				
 
 			});
 	
@@ -141,6 +138,5 @@ $(document).ready(function(){
 	
 		book.list();
 		book.save();
-		console.log("All : "+book.getSavedContacts());
 	
-	});
+});
