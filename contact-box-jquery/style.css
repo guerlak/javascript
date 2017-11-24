@@ -106,3 +106,7 @@ span:hover{
 	color:#e74c3c;
 	text-shadow: 1px 1px #c0392b;
 }
+
+.btnDelete{
+	margin-right: 5px; 
+}
