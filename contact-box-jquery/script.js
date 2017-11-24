@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	
 		var book = {
+			
 			name: 'Personal Contacts',
 	
 			contacts: [],
@@ -35,10 +36,7 @@ $(document).ready(function(){
 			update: function(oldPhone, contactUpdated){
 				console.log("Passou no update")
 				this.delete(oldPhone);
-
-				//btn
-
-				this.add(contactUpdated);
+ 				this.add(contactUpdated);
 			},
 	
 			list: function(){
@@ -50,9 +48,7 @@ $(document).ready(function(){
 			},
 	
 			save: function(){
-			
 				localStorage.setItem(contacts.name,  JSON.stringify(this.contacts));
-	
 			},
 	
 			getSavedContacts: function(){
