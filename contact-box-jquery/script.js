@@ -68,7 +68,7 @@ $(document).ready(function(){
 			if($('#btnSubmit').val() == 'Register'){
 				console.log("This contact: " + contact.name);
 				book.add(contact);
-				return ;
+				return;
 			} 
 
 			$('#btnSubmit').val('Register');
@@ -136,7 +136,7 @@ $(document).ready(function(){
 
 		}
 	
-		book.list();
-		book.save();
+		//book.list();
+		//book.save();
 	
 });
