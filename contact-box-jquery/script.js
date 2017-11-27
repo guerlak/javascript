@@ -138,6 +138,7 @@ $(document).ready(function(){
 		...get contacts by localStorage?
 		book.list();
 		book.save();
+		
 		*/
 	
 });
