@@ -22,15 +22,12 @@ $(document).ready(function(){
 			snake:{
 				fill:"#e67e22",
 				border:"#e357ee",
-				 
 			},
 			food: {
 				fill:"#160a32",
 				border:"#1704ff"
 			}
-			
 		}
-
 		this.keyCode = {
 			UP: '38',
 			DOWN:'40',
@@ -39,7 +36,6 @@ $(document).ready(function(){
 			P: '80',
 			C:'67'
 		}
-
 	}).call(SNAKE.config);
 
 //VIEW
@@ -53,7 +49,6 @@ $(document).ready(function(){
 
 			context.fillStyle = color;
 			context.strokeStyke = color;
-		
 			context.fillRect(x*cell, y*cell, cell, cell);
 			context.strokeRect(x*cell, y*cell, cell, cell);
 		}				
@@ -63,6 +58,7 @@ $(document).ready(function(){
 			var gameWidth = config.gameWidth;
 			var gameHeight = config.gameHeight;
 			var boardBoarder = config.color.boardBoarder;
+
 			context.fillStyle = background;
 			context.fillRect(0, 0, gameWidth , gameHeight);
 			context.strokeStyke = boardBoarder;
@@ -88,6 +84,7 @@ $(document).ready(function(){
 
 		this.refreshView = function(food, snake, score){
 			var foodColor = config.color.food.fill;
+
 			paintGameBoard();
 			paintSnake(snake);
 			paintCell(food.x, food.y, foodColor);
@@ -99,18 +96,16 @@ $(document).ready(function(){
 //CONTROLLER 
 
 	(function initController(config, view){
-
 		var food;
 		var snake;
 		var score;
 		var direction;
 		var gameLoop;
 		var that = this;
-
 		var createSnake = function(){
-			var snakeLength = config.snakeLength;
-			snake = [];
+		var snakeLength = config.snakeLength;
 
+		snake = [];
 			for(var i = snakeLength -1; i >=0; i--){
 				snake.push({
 					x:i,
@@ -242,13 +237,12 @@ $(document).ready(function(){
 
 		this.startLooping = function(){
 
-			if(typeof gameLoop != "undefined") {
-				console.log("Passando em C")
-				clearInterval(gameLoop);
-				console.log("intervel " + gameLoop);
-			}
-			
-		 gameLoop = setInterval(gameRefresh, config.speed);
+				if(typeof gameLoop != "undefined") {
+					console.log("Passando em C")
+					clearInterval(gameLoop);
+					console.log("intervel " + gameLoop);
+				}
+		 	gameLoop = setInterval(gameRefresh, config.speed);
 		}
 
 		this.stopLooping = function(){
