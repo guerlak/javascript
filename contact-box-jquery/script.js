@@ -105,7 +105,6 @@ $(document).ready(function(){
 			});
 
 			$btnEdit.click(function(event){
-				
 				var $btn = $(event.target);
 				var phone = $btn.data('phone');
 				var $box = $('#'.concat(phone));
