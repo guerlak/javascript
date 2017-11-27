@@ -8,7 +8,6 @@ $(document).ready(function(){
 	
 			add: function(contact){
 				for(key in this.contacts){
-					console.log("entered for add");
 					var c = this.contacts[key];
 						if(contact.phone === c.phone){
 							alert("Sorry, this phone number is already registered.");
@@ -34,9 +33,9 @@ $(document).ready(function(){
 			},
 
 			update: function(oldPhone, contactUpdated){
-				console.log("Passou no update")
 				this.delete(oldPhone);
- 				this.add(contactUpdated);
+				this.add(contactUpdated);
+
 			},
 	
 			list: function(){
@@ -54,6 +53,7 @@ $(document).ready(function(){
 			getSavedContacts: function(){
 				contacts = JSON.parse(localStorage.contacts);
 			}
+
 		};
 	
 		$("#register").submit(function(event){
@@ -96,18 +96,16 @@ $(document).ready(function(){
 			var $contacts = $('#contacts');
 
 			$btnDelete.click(function(event){
-				console.log("passing delete")
 				var $btn = $(event.target);
 				var phone = $btn.data('phone');
 				var $box = $('#'.concat(phone));
-				console.log("O phone no delete é: " + phone);
 					book.delete(phone);
 					$box.remove();
 
 			});
 
 			$btnEdit.click(function(event){
-				console.log("entered edit btn");
+				
 				var $btn = $(event.target);
 				var phone = $btn.data('phone');
 				var $box = $('#'.concat(phone));
@@ -119,10 +117,11 @@ $(document).ready(function(){
 				$('#txName').val($name.text());
 				$('#txtEmail').val($email.text());
 				$('#txtPhone').val($phone.text());
-				$('#txtwebsite').val($email.text());
+				$('#txtwebsite').val($website.text());
 				var oldPhone = $('#oldPhone').val($phone.text());
 				var phone = 	$('#txtPhone').val($phone.text());
 				$('#btnSubmit').val('Update');
+				$box.remove();
 
 			});
 	

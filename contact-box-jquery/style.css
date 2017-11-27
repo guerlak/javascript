@@ -109,4 +109,17 @@ span:hover{
 
 .btnDelete{
 	margin-right: 5px; 
+	height:30px;
+	background-color: #c20821;
+	border-radius: 5px;
+	color:#ffffff;
+
+}
+
+.btnEdit{
+	height:30px;
+	background-color: #e2d73e;
+	border-radius: 5px;
+	color:#ffffff;
+	
 }
