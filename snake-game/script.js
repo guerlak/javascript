@@ -6,7 +6,8 @@ $(document).ready(function(){
 		config:{}
 	};
 
-	//Configuration namespace
+//CONFIG
+
 	(function initConfig(){
 		this.$canvas = $("#snakeCanvas");
 		this.gameWidth = this.$canvas.width();
@@ -14,7 +15,7 @@ $(document).ready(function(){
 		this.cellWidth = 10;
 		this.scoreTextStyle = "15px Verdana";
 		this.snakeLength = 5;
-		this.speed = 60;
+		this.speed = 100;
 		this.color = {
 			background: '#ffffff',
 			boardBoarder:'#2c3e50',
@@ -76,10 +77,10 @@ $(document).ready(function(){
 		var paintScore = function(score){
 				var color = config.color.score;
 				var textStyle = config.scoreTextStyle;
-	
+
 				context.font = textStyle;
 				context.fillStyle = color;
-				context.fillText(score, 5, 30);
+				context.fillText("Score: "+ score, 5, 30);
 		}
 
 		this.refreshView = function(food, snake, score){
@@ -104,9 +105,10 @@ $(document).ready(function(){
 		var that = this;
 		var createSnake = function(){
 		var snakeLength = config.snakeLength;
+		var leveled;
 
 		snake = [];
-			for(var i = snakeLength -1; i >=0; i--){
+			for(var i = snakeLength -1; i >= 0; i--){
 				snake.push({
 					x:i,
 					y:0
@@ -136,9 +138,9 @@ $(document).ready(function(){
 					direction = "right";
 				}else if(pressedKey == keyCode.LEFT && direction != "right"){
 					direction= 'left';
-				}else if(pressedKey == keyCode.UP && direction != "up"){
+				}else if(pressedKey == keyCode.UP && direction != "down"){
 					direction= 'up';
-				}else if(pressedKey == keyCode.DOWN && direction != "down"){
+				}else if(pressedKey == keyCode.DOWN && direction != "up"){
 					direction= 'down';
 				}else if(pressedKey == keyCode.P){
 					that.stopLooping();
@@ -149,9 +151,10 @@ $(document).ready(function(){
 		}
 
 		var incrementScore = function(){
-			if(detectSnakeEatFood){
-				score+5;
-			}
+				score++;
+				if(score == 6){
+					checkLevelUp(score);
+				}
 		}
 
 		var checkBodyCollision = function(head){
@@ -217,41 +220,47 @@ $(document).ready(function(){
 				var newHeadPosition = chooseSnakeDirection();
 				checkCollision(newHeadPosition);
 				var tail = detectSnakeEatFood(newHeadPosition);
-				
 				moveSnake(tail);
 				view.refreshView(food, snake, score);
 			}catch(e){
 				alert(e.message);
+				
 				SNAKE.init(SNAKE.controller, SNAKE.config, SNAKE.view);
+				clearInterval(gameLoop);
 			}
 		}
 
-		this.initGameDefault= function(){
+		this.initGameDefault = function(){
 			var snakeLength = config.snakeLength;
 			addKeyEventListener();
 			direction = "right";
+			score = snakeLength;
 			createSnake();
 			createFood();
-			score = snakeLength;
+		}
+
+		var checkLevelUp = function(score){
+			if(score == 6){
+			
+			gameLoop = setInterval(gameRefresh, config.speed);
+			}
 		}
 
 		this.startLooping = function(){
-
 				if(typeof gameLoop != "undefined") {
-					console.log("Passando em C")
+					console.log("Passando em C");
+					console.log("Intervalo gameLoop: " + gameLoop);
 					clearInterval(gameLoop);
-					console.log("intervel " + gameLoop);
+					
 				}
-		 	gameLoop = setInterval(gameRefresh, config.speed);
+			 gameLoop = setInterval(gameRefresh, config.speed);
+			
 		}
 
 		this.stopLooping = function(){
-			
-			if(typeof gameLoop != 'undefined'){
-				console.log("Passando em P")
 				clearInterval(gameLoop);
 				gameRefresh();
-			}
+			
 		}
 			
 	}).call(SNAKE.controller, SNAKE.config, SNAKE.view);
