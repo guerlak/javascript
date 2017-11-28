@@ -136,11 +136,11 @@ $(document).ready(function(){
 				if(pressedKey == keyCode.RIGHT && direction != "left"){
 					direction = "right";
 				}else if(pressedKey == keyCode.LEFT && direction != "right"){
-					direction= 'left';
+					direction = 'left';
 				}else if(pressedKey == keyCode.UP && direction != "down"){
-					direction= 'up';
+					direction = 'up';
 				}else if(pressedKey == keyCode.DOWN && direction != "up"){
-					direction= 'down';
+					direction = 'down';
 				}else if(pressedKey == keyCode.P){
 					that.stopLooping();
 				}else if(pressedKey == keyCode.C){
@@ -151,9 +151,7 @@ $(document).ready(function(){
 
 		var incrementScore = function(){
 				score++;
-				if(score == 6){
-					checkLevelUp(score);
-				}
+				levelUp(score);
 		}
 
 		var checkBodyCollision = function(head){
@@ -173,7 +171,10 @@ $(document).ready(function(){
 			var topCollision = head.y == config.gameHeight/config.cellWidth;
 
 			if(leftCollision || rightCollision || bottomCollision || topCollision || checkBodyCollision(head)){
+				clearInterval(gameLoop);
+				clearInterval(gameLoopLevel2);
 				throw new Error("You Loose :D");
+				
 			}
 		}
 
@@ -223,9 +224,8 @@ $(document).ready(function(){
 				view.refreshView(food, snake, score);
 			}catch(e){
 				alert(e.message);
-				
 				SNAKE.init(SNAKE.controller, SNAKE.config, SNAKE.view);
-				clearInterval(gameLoop);
+				//clearInterval(gameLoop);
 			}
 		}
 
@@ -236,19 +236,20 @@ $(document).ready(function(){
 			score = snakeLength;
 			createSnake();
 			createFood();
+
 		}
 
-		var checkLevelUp = function(score){
+		var levelUp = function(score){
 			if(score == 6){
-			
-			gameLoop = setInterval(gameRefresh, config.speed);
+				gameLoopLevel2 = setInterval(gameRefresh, 90);
+
 			}
 		}
 
 		this.startLooping = function(){
 				if(typeof gameLoop != "undefined") {
-					console.log("Passando em C");
-					console.log("Intervalo gameLoop: " + gameLoop);
+					console.log("Running C");
+					console.log("Interval gameLoop: " + gameLoop);
 					clearInterval(gameLoop);
 					
 				}
