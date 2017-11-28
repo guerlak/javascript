@@ -103,11 +103,10 @@ $(document).ready(function(){
 		var direction;
 		var gameLoop;
 		var that = this;
-		var createSnake = function(){
 		var snakeLength = config.snakeLength;
-		var leveled;
-
-		snake = [];
+		
+		var createSnake = function(){
+			snake = [];
 			for(var i = snakeLength -1; i >= 0; i--){
 				snake.push({
 					x:i,
