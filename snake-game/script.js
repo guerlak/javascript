@@ -16,6 +16,7 @@ $(document).ready(function(){
 		this.scoreTextStyle = "15px Verdana";
 		this.snakeLength = 5;
 		this.speed = 100;
+		
 		this.color = {
 			background: '#ffffff',
 			boardBoarder:'#2c3e50',
@@ -29,6 +30,7 @@ $(document).ready(function(){
 				border:"#1704ff"
 			}
 		}
+
 		this.keyCode = {
 			UP: '38',
 			DOWN:'40',
@@ -37,6 +39,7 @@ $(document).ready(function(){
 			P: '80',
 			C:'67'
 		}
+
 	}).call(SNAKE.config);
 
 //VIEW
