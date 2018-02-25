@@ -15,7 +15,7 @@ scores = [0, 0];
 roundScore = 0;
 activePlayer = 0;
 
-document.querySelector('.dice').style.display= 'none';
+document.querySelector('.dice').style.display = 'none';
 
 document.getElementById('score-0').textContent = '0';
 document.getElementById('score-1').textContent = '0';
@@ -28,11 +28,9 @@ function changePlayer() {
     } else {
         activePlayer = 0;
     }
-
 }
 
-if(activePlayer === 1){
-
+if (activePlayer === 1) {
     document.querySelector('.player-1-panel')
 
 }
@@ -40,9 +38,9 @@ if(activePlayer === 1){
 var currentNumber = 0;
 
 document.querySelector('.btn-roll').addEventListener('click', function () {
-    
+
     var diceDOM = document.querySelector('.dice');
-        //diceDOM.style.display = 'block';
+    diceDOM.style.display = 'block';
     dice = Math.floor(Math.random() * 6) + 1;
     if (dice === 1) {
         document.querySelector('#current-' + activePlayer).textContent = 'You loose';
@@ -54,21 +52,33 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
     }
 });
 
-
 document.querySelector('.btn-hold').addEventListener('click', function () {
 
-    console.log(dice);
     scores[activePlayer] += currentNumber;
     document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+    currentNumber = 0;
     changePlayer();
 
-})
+});
 
-//setter
-//document.querySelector('#current-' + activePlayer).textContent = dice;
+document.querySelector('.btn-new').addEventListener('click', newGame);
 
-//HTML insertion instead of TEXT
-//document.querySelector('#current-' + activePlayer).innerHTML = '<h3>' + dice + '</h3>';
+function newGame() {
+
+        document.querySelector('.dice').style.display = 'none';
+        document.querySelector('#current-0').textContent = 0;
+        document.querySelector('#current-1').textContent = 0;
+        document.querySelector('#score-0').textContent = 0;
+        document.querySelector('#score-1').textContent = 0;
+    
+        currentNumber = 0;
+    
+        scores[0] = 0;
+        scores[1] = 0;
+        dice = 0;
+    
+    };
+    
 
 
 
