@@ -9,14 +9,17 @@ GAME RULES:
 
 */
 
-var scores, currentNumber, activePlayer, dice;
+var scores, currentNumber, activePlayer, dice, winner, loose;
 
 scores = [0, 0];
 currentNumber = 0;
 activePlayer = 0;
+winner = true;
+loose = false;
+
+newGame();
 
 document.querySelector('.dice').style.display = 'none';
-
 document.getElementById('score-0').textContent = '0';
 document.getElementById('score-1').textContent = '0';
 document.getElementById('current-0').textContent = '0';
@@ -26,22 +29,31 @@ function changePlayer() {
     if (activePlayer === 0) {
         activePlayer = 1;
 
-        document.querySelector
+        var element  = document.querySelector('.player-0-panel');
+        element.classList.remove('active');
 
+        var element2 = document.querySelector('.player-1-panel');
+        element2.classList.add('active');
 
     } else {
         activePlayer = 0;
+
+        document.querySelector('.player-1-panel').classList.remove('active');
+        document.querySelector('.player-0-panel').classList.add('active');
     }
 }
 
-if (activePlayer === 1) {
-    document.querySelector('.player-1-panel')
+function detectWinner() {
 
+    if(scores[0] >= 20){
+        alert("Player 1 wins!!!")
+    }else if(scores[1] >= 20){
+        alert("Player 2 wins!!!")
+    } else{
+        return;
+    }
+        
 }
-
-
-
-var loose = false;
 
 var handlers = {
 
@@ -73,29 +85,25 @@ var handlers = {
         document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
         document.querySelector('#current-' + activePlayer).textContent = 0;
         currentNumber = 0;
+        detectWinner();
         changePlayer();
     
     }),
     
     btnNew: document.querySelector('.btn-new').addEventListener('click', newGame),
 
-    showConsole: function () {
-     alert("show");
-        
-    }
-
 }
 
 function newGame() {
 
-    prompt("Type yes to new game");
-
-        document.querySelector('.dice').style.display = 'none';
+  
+        //document.querySelector('.dice').style.display = 'none';
         document.querySelector('#current-0').textContent = 0;
         document.querySelector('#current-1').textContent = 0;
         document.querySelector('#score-0').textContent = 0;
         document.querySelector('#score-1').textContent = 0;
-    
+
+        document.querySelector('.player-0-panel').classList.add('active');    
         currentNumber = 0;
     
         scores[0] = 0;
