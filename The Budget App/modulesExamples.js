@@ -29,7 +29,7 @@ var UIController = (function(){ // IIFE to privacy
 })();
 
 
-var controller = (function (budget, u){
+var controller = (function (budget, ui){
 
     var z = budget.publicTest(5);
 
